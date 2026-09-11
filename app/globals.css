@@ -24,3 +24,76 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* =========================================================
+   VILLAGE PORTAL AUTH MOTION
+========================================================= */
+
+@keyframes auth-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes auth-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auth-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(25px, 20px, 0);
+  }
+}
+
+@keyframes auth-float-reverse {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-25px, -20px, 0);
+  }
+}
+
+.animate-auth-fade-in {
+  animation: auth-fade-in 0.7s ease-out both;
+}
+
+.animate-auth-slide-up {
+  animation: auth-slide-up 0.8s ease-out both;
+}
+
+.animate-auth-float {
+  animation: auth-float 9s ease-in-out infinite;
+}
+
+.animate-auth-float-reverse {
+  animation: auth-float-reverse 11s ease-in-out infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-auth-fade-in,
+  .animate-auth-slide-up,
+  .animate-auth-float,
+  .animate-auth-float-reverse {
+    animation: none;
+  }
+}
