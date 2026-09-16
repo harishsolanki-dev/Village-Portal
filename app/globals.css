@@ -97,3 +97,201 @@ body {
     animation: none;
   }
 }
+
+@keyframes authEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(35px, 25px, 0) scale(1.08);
+  }
+}
+
+@keyframes orbFloatReverse {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-35px, -25px, 0) scale(1.1);
+  }
+}
+
+@keyframes houseFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(-4deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotateY(4deg);
+  }
+}
+
+@keyframes treeFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotateZ(-1deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotateZ(2deg);
+  }
+}
+
+@keyframes sunFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes cloudMove {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateX(300px);
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* =========================================================
+   VILLAGE PORTAL HOME MOTION
+========================================================= */
+
+@keyframes homeOrb {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(35px, 25px, 0) scale(1.08);
+  }
+}
+
+@keyframes homeOrbReverse {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-35px, -30px, 0) scale(1.1);
+  }
+}
+
+@keyframes homeSun {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes homeHouse {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(-3deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotateY(3deg);
+  }
+}
+
+@keyframes homeTree {
+  0%,
+  100% {
+    transform: translateY(0) rotateZ(-1deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotateZ(2deg);
+  }
+}
+
+@keyframes homeCloud {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(380px);
+    opacity: 0.1;
+  }
+}
+
+@keyframes homeBadge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes homeStore {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
