@@ -22,6 +22,11 @@ const navigation = [
     href: "/admin",
     icon: LayoutDashboard,
   },
+   {
+    label: "Categories",
+    href: "/admin/categories",
+    icon: LayoutDashboard,
+  },
   {
     label: "News",
     href: "/admin/news",
