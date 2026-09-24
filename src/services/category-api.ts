@@ -1,137 +1,225 @@
+import { apiClient } from "@/src/services/api-client";
 
-import { env } from "../config/env";
-import { ApiMessageResponse, ApiResponse } from "../features/admin/categories/components/types/api.types";
-import { Category, CategoryFormData, PageResponse } from "../features/admin/categories/components/types/category.types";
+import {
+  ApiMessageResponse,
+  ApiResponse,
+} from "@/src/features/admin/categories/components/types/api.types";
 
-const CATEGORY_URL = `${env.apiUrl}/api/categories`;
+import {
+  Category,
+  CategoryFormData,
+  PageResponse,
+} from "@/src/features/admin/categories/components/types/category.types";
 
+const CATEGORY_URL = "/api/categories";
+
+/**
+ * Common API response handler.
+ */
 async function handleResponse<T>(
   response: Response
 ): Promise<T> {
-  const body = await response.json();
 
-  if (!response.ok) {
+  /*
+   * Some DELETE/PATCH APIs can return
+   * an empty response.
+   */
+  const contentType =
+    response.headers.get("content-type");
+
+  let body: any = null;
+
+  if (
+    contentType?.includes(
+      "application/json"
+    )
+  ) {
+    body = await response.json();
+  }
+
+  /*
+   * Unauthorized
+   */
+  if (response.status === 401) {
     throw new Error(
-      body?.message || "Something went wrong"
+      "Your session has expired. Please login again."
     );
   }
 
-  return body;
+  /*
+   * Forbidden
+   */
+  if (response.status === 403) {
+    throw new Error(
+      "You do not have permission to perform this action."
+    );
+  }
+
+  /*
+   * Other errors
+   */
+  if (!response.ok) {
+    throw new Error(
+      body?.message ||
+        `Request failed with status ${response.status}.`
+    );
+  }
+
+  return body as T;
 }
 
+/**
+ * GET /api/categories
+ *
+ * Fetch active categories with pagination.
+ */
 export async function getCategories(
   page = 0,
   size = 10
-): Promise<ApiResponse<PageResponse<Category>>> {
-  const response = await fetch(
+): Promise<
+  ApiResponse<PageResponse<Category>>
+> {
+
+  const response = await apiClient(
     `${CATEGORY_URL}?page=${page}&size=${size}`,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
     }
   );
 
-  return handleResponse(response);
+  return handleResponse<
+    ApiResponse<PageResponse<Category>>
+  >(response);
 }
 
+/**
+ * GET /api/categories/{id}
+ *
+ * Fetch category by UUID.
+ */
 export async function getCategoryById(
   id: string
 ): Promise<ApiResponse<Category>> {
-  const response = await fetch(
+
+  const response = await apiClient(
     `${CATEGORY_URL}/${id}`,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
     }
   );
 
-  return handleResponse(response);
+  return handleResponse<
+    ApiResponse<Category>
+  >(response);
 }
 
+/**
+ * POST /api/categories
+ *
+ * Create category.
+ */
 export async function createCategory(
   data: CategoryFormData
 ): Promise<ApiResponse<Category>> {
-  const response = await fetch(CATEGORY_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
 
-  return handleResponse(response);
-}
-
-export async function updateCategory(
-  id: string,
-  data: CategoryFormData
-): Promise<ApiResponse<Category>> {
-  const response = await fetch(
-    `${CATEGORY_URL}/${id}`,
+  const response = await apiClient(
+    CATEGORY_URL,
     {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: "POST",
       body: JSON.stringify(data),
     }
   );
 
-  return handleResponse(response);
+  return handleResponse<
+    ApiResponse<Category>
+  >(response);
 }
 
+/**
+ * PUT /api/categories/{id}
+ *
+ * Update category.
+ */
+export async function updateCategory(
+  id: string,
+  data: CategoryFormData
+): Promise<ApiResponse<Category>> {
+
+  const response = await apiClient(
+    `${CATEGORY_URL}/${id}`,
+    {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }
+  );
+
+  return handleResponse<
+    ApiResponse<Category>
+  >(response);
+}
+
+/**
+ * DELETE /api/categories/{id}
+ *
+ * Soft delete category.
+ */
 export async function deleteCategory(
   id: string
 ): Promise<ApiMessageResponse> {
-  const response = await fetch(
+
+  const response = await apiClient(
     `${CATEGORY_URL}/${id}`,
     {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     }
   );
 
-  return handleResponse(response);
+  return handleResponse<
+    ApiMessageResponse
+  >(response);
 }
 
+/**
+ * GET /api/categories/deleted
+ *
+ * Fetch deleted/inactive categories.
+ */
 export async function getDeletedCategories(
   page = 0,
   size = 10
-): Promise<ApiResponse<PageResponse<Category>>> {
-  const response = await fetch(
+): Promise<
+  ApiResponse<PageResponse<Category>>
+> {
+
+  const response = await apiClient(
     `${CATEGORY_URL}/deleted?page=${page}&size=${size}`,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
     }
   );
 
-  return handleResponse(response);
+  return handleResponse<
+    ApiResponse<PageResponse<Category>>
+  >(response);
 }
 
+/**
+ * PATCH /api/categories/{id}/restore
+ *
+ * Restore deleted category.
+ */
 export async function restoreCategory(
   id: string
 ): Promise<ApiMessageResponse> {
-  const response = await fetch(
+
+  const response = await apiClient(
     `${CATEGORY_URL}/${id}/restore`,
     {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
     }
   );
 
-  return handleResponse(response);
+  return handleResponse<
+    ApiMessageResponse
+  >(response);
 }

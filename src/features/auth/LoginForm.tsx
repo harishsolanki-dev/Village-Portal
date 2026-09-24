@@ -406,6 +406,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/src/services/auth-api";
+import { setAuthSession } from "@/src/services/auth-storage";
 
 interface LoginErrors {
   email?: string;
@@ -442,69 +443,160 @@ const router = useRouter();
     return Object.keys(nextErrors).length === 0;
   }
 
- async function handleSubmit(
-  event: FormEvent<HTMLFormElement>
-) {
-  event.preventDefault();
+//  async function handleSubmit(
+//   event: FormEvent<HTMLFormElement>
+// ) {
+//   event.preventDefault();
 
+//   setErrors({});
+
+//   if (!validate()) {
+//     return;
+//   }
+
+//   setLoading(true);
+
+//   try {
+//     const response = await loginUser({
+//       email: email.trim(),
+//       password,
+//     });
+
+//     if (!response.success) {
+//       setErrors({
+//         password:
+//           response.message ||
+//           "Login failed.",
+//       });
+
+//       return;
+//     }
+
+//     /*
+//      * IMPORTANT:
+//      *
+//      * We do NOT store accessToken in:
+//      * - localStorage
+//      * - sessionStorage
+//      * - document.cookie
+//      *
+//      * The backend should set the JWT
+//      * as an HttpOnly cookie.
+//      */
+
+//     const role = response.data.user.role;
+
+//     if (role === "SUPER_ADMIN") {
+//       router.push("/dashboard");
+//     } else if (role === "ADMIN") {
+//       router.push("/dashboard");
+//     } else {
+//       router.push("/");
+//     }
+
+//   } catch (error) {
+//     setErrors({
+//       password:
+//         error instanceof Error
+//           ? error.message
+//           : "Unable to sign in. Please try again.",
+//     });
+//   } finally {
+//     setLoading(false);
+//   }
+// }
+
+async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
   setErrors({});
 
-  if (!validate()) {
-    return;
-  }
+  if (!validate()) return;
 
   setLoading(true);
 
+  // try {
+  //   const response = await loginUser({
+  //     email: email.trim(),
+  //     password,
+  //   });
+
+  //   if (!response.success) {
+  //     setErrors({
+  //       password: response.message || "Login failed.",
+  //     });
+  //     return;
+  //   }
+
+  //   const userRole = response.data?.user?.role;
+
+  //   // Route based on role returned from Spring Boot ("USER", "ADMIN", "SUPER_ADMIN")
+  //   if (userRole === "SUPER_ADMIN" || userRole === "ADMIN") {
+  //     router.push("/dashboard");
+  //   } else {
+  //     router.push("/");
+  //   }
+
+  //   // Force page refresh if router.push doesn't trigger layout updates
+  //   router.refresh();
+
+  // } catch (error) {
+  //   setErrors({
+  //     password:
+  //       error instanceof Error
+  //         ? error.message
+  //         : "Unable to sign in. Please check your credentials and try again.",
+  //   });
+  // } finally {
+  //   setLoading(false);
+  // }
+
   try {
-    const response = await loginUser({
-      email: email.trim(),
-      password,
-    });
+  const response = await loginUser({
+    email: email.trim(),
+    password,
+  });
 
-    if (!response.success) {
-      setErrors({
-        password:
-          response.message ||
-          "Login failed.",
-      });
-
-      return;
-    }
-
-    /*
-     * IMPORTANT:
-     *
-     * We do NOT store accessToken in:
-     * - localStorage
-     * - sessionStorage
-     * - document.cookie
-     *
-     * The backend should set the JWT
-     * as an HttpOnly cookie.
-     */
-
-    const role = response.data.user.role;
-
-    if (role === "SUPER_ADMIN") {
-      router.push("/dashboard");
-    } else if (role === "ADMIN") {
-      router.push("/dashboard");
-    } else {
-      router.push("/");
-    }
-
-  } catch (error) {
+  if (!response.success) {
     setErrors({
       password:
-        error instanceof Error
-          ? error.message
-          : "Unable to sign in. Please try again.",
+        response.message || "Login failed.",
     });
-  } finally {
-    setLoading(false);
-  }
-}
 
+    return;
+  }
+
+  const {
+    accessToken,
+    user,
+  } = response.data;
+
+  // Store authenticated session
+  setAuthSession(
+    accessToken,
+    user
+  );
+
+  // Role based navigation
+  if (
+    user.role === "SUPER_ADMIN" ||
+    user.role === "ADMIN"
+  ) {
+    router.push("/admin");
+  } else {
+    router.push("/");
+  }
+
+} catch (error) {
+  setErrors({
+    password:
+      error instanceof Error
+        ? error.message
+        : "Unable to sign in. Please try again.",
+  });
+} finally {
+  setLoading(false);
+}
+}
   return (
     <div>
 
