@@ -1,42 +1,141 @@
+// import { SectionHeading } from "@/src/components/ui/section-heading";
+
+
+// const events = [
+//   {
+//     day: "15",
+//     month: "SEP",
+//     title: "Temple Festival Opening",
+//     time: "10:00 AM",
+//     location: "Village Temple",
+//   },
+//   {
+//     day: "21",
+//     month: "SEP",
+//     title: "Community Health Camp",
+//     time: "09:00 AM",
+//     location: "Community Hall",
+//   },
+//   {
+//     day: "02",
+//     month: "OCT",
+//     title: "Clean Village Drive",
+//     time: "08:00 AM",
+//     location: "Main Village Area",
+//   },
+// ];
+
+// export function UpcomingEvents() {
+//   return (
+//     <section>
+
+//       <SectionHeading
+//         icon="📅"
+//         title="Upcoming Events"
+//         href="/events"
+//       />
+
+//       <div className="overflow-hidden rounded-2xl border border-[#E5E2D8] bg-white">
+
+//         {events.map((event, index) => (
+//           <div
+//             key={event.title}
+//             className={`
+//               flex gap-4 p-4
+//               transition-colors
+//               hover:bg-[#FAFAF7]
+//               ${
+//                 index !== events.length - 1
+//                   ? "border-b border-[#ECE9E0]"
+//                   : ""
+//               }
+//             `}
+//           >
+
+//             <div
+//               className="
+//                 flex h-14 w-14 shrink-0
+//                 flex-col items-center
+//                 justify-center
+//                 rounded-xl
+//                 bg-[#F5EFE1]
+//               "
+//             >
+//               <span className="text-lg font-black">
+//                 {event.day}
+//               </span>
+
+//               <span className="text-[9px] font-bold text-[#D99A2B]">
+//                 {event.month}
+//               </span>
+//             </div>
+
+//             <div className="min-w-0">
+
+//               <h3 className="text-sm font-bold">
+//                 {event.title}
+//               </h3>
+
+//               <p className="mt-1 text-[11px] text-[#858379]">
+//                 🕐 {event.time}
+//               </p>
+
+//               <p className="mt-1 truncate text-[11px] text-[#858379]">
+//                 📍 {event.location}
+//               </p>
+
+//             </div>
+
+//           </div>
+//         ))}
+
+//       </div>
+
+//     </section>
+//   );
+// }
+
+"use client";
+
 import { SectionHeading } from "@/src/components/ui/section-heading";
-
-
-const events = [
-  {
-    day: "15",
-    month: "SEP",
-    title: "Temple Festival Opening",
-    time: "10:00 AM",
-    location: "Village Temple",
-  },
-  {
-    day: "21",
-    month: "SEP",
-    title: "Community Health Camp",
-    time: "09:00 AM",
-    location: "Community Hall",
-  },
-  {
-    day: "02",
-    month: "OCT",
-    title: "Clean Village Drive",
-    time: "08:00 AM",
-    location: "Main Village Area",
-  },
-];
+import { useLanguage } from "@/src/components/i18n/language-provider";
 
 export function UpcomingEvents() {
+  const { t } = useLanguage();
+
+  const events = [
+    {
+      day: "15",
+      month: "SEP",
+      title: t("events.templeFestival"),
+      time: "10:00 AM",
+      location: t("events.villageTemple"),
+    },
+    {
+      day: "21",
+      month: "SEP",
+      title: t("events.healthCamp"),
+      time: "09:00 AM",
+      location: t("events.communityHall"),
+    },
+    {
+      day: "02",
+      month: "OCT",
+      title: t("events.cleanVillage"),
+      time: "08:00 AM",
+      location: t("events.mainVillageArea"),
+    },
+  ];
+
   return (
     <section>
-
       <SectionHeading
         icon="📅"
-        title="Upcoming Events"
+        title={t("common.upcomingEvents")}
         href="/events"
       />
 
-      <div className="overflow-hidden rounded-2xl border border-[#E5E2D8] bg-white">
-
+      <div className="overflow-hidden rounded-2xl border border-[#E5E2D8] bg-white dark:border-white/10 dark:bg-[#1C1D17]">
         {events.map((event, index) => (
           <div
             key={event.title}
@@ -44,14 +143,14 @@ export function UpcomingEvents() {
               flex gap-4 p-4
               transition-colors
               hover:bg-[#FAFAF7]
+              dark:hover:bg-white/5
               ${
                 index !== events.length - 1
-                  ? "border-b border-[#ECE9E0]"
+                  ? "border-b border-[#ECE9E0] dark:border-white/10"
                   : ""
               }
             `}
           >
-
             <div
               className="
                 flex h-14 w-14 shrink-0
@@ -59,6 +158,7 @@ export function UpcomingEvents() {
                 justify-center
                 rounded-xl
                 bg-[#F5EFE1]
+                dark:bg-[#D99A2B]/10
               "
             >
               <span className="text-lg font-black">
@@ -71,26 +171,21 @@ export function UpcomingEvents() {
             </div>
 
             <div className="min-w-0">
-
               <h3 className="text-sm font-bold">
                 {event.title}
               </h3>
 
-              <p className="mt-1 text-[11px] text-[#858379]">
+              <p className="mt-1 text-[11px] text-[#858379] dark:text-white/45">
                 🕐 {event.time}
               </p>
 
-              <p className="mt-1 truncate text-[11px] text-[#858379]">
+              <p className="mt-1 truncate text-[11px] text-[#858379] dark:text-white/45">
                 📍 {event.location}
               </p>
-
             </div>
-
           </div>
         ))}
-
       </div>
-
     </section>
   );
 }

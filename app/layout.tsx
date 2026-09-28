@@ -68,19 +68,15 @@
 // }
 
 import type { Metadata } from "next";
+
 import "./globals.css";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
+import { LanguageProvider } from "@/src/components/i18n/language-provider";
+import { ThemeProvider } from "@/src/components/theme/theme-switcher";
 export const metadata: Metadata = {
-  title: {
-    default: "Village Portal",
-    template: "%s | Village Portal",
-  },
+  title: "Village Portal",
   description:
-    "Village Portal - News, events, videos, gallery and community information.",
+    "A digital community platform for village news, events, services and local information.",
 };
 
 export default function RootLayout({
@@ -89,8 +85,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LanguageProvider defaultLanguage="en">
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

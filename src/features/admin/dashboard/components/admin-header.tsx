@@ -1,5 +1,7 @@
 "use client";
 
+import { LanguageSwitcher } from "@/src/components/language/language-switcher";
+import { ThemeSwitcher } from "@/src/components/theme/theme-switcher";
 import {
   Bell,
   Menu,
@@ -63,8 +65,12 @@ export function AdminHeader() {
           "
         >
           <Search className="h-4 w-4" />
+        
         </button>
-
+  <div className="flex items-center gap-2 ">
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+          </div>
         <button
           className="
             relative
