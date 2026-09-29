@@ -97,11 +97,52 @@
 // }
 
 
+// "use client";
+
+// import { Languages } from "lucide-react";
+// import { useLanguage } from "../i18n/language-provider";
+
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
+
+// import { buttonVariants } from "@/components/ui/button"; // 👈 buttonVariants ઈમ્પોર્ટ કરો
+
+// export function LanguageSwitcher() {
+//   const { language, setLanguage, t } = useLanguage();
+
+//   return (
+//     <DropdownMenu>
+//       {/* asChild કાઢી નાખો અને ડાયરેક્ટ buttonVariants આપો */}
+//       <DropdownMenuTrigger
+//         className={buttonVariants({
+//           variant: "outline",
+//           className: "h-10 rounded-xl gap-2 border-border bg-background text-foreground hover:bg-muted",
+//         })}
+//       >
+//         <Languages className="h-4 w-4" />
+//         {language === "en" ? "English" : "ગુજરાતી"}
+//       </DropdownMenuTrigger>
+
+//       <DropdownMenuContent align="end">
+//         <DropdownMenuItem onClick={() => setLanguage("en")}>
+//           🇬🇧 {t.language.english}
+//         </DropdownMenuItem>
+
+//         <DropdownMenuItem onClick={() => setLanguage("gu")}>
+//           🇮🇳 {t.language.gujarati}
+//         </DropdownMenuItem>
+//       </DropdownMenuContent>
+//     </DropdownMenu>
+//   );
+// }
+
 "use client";
 
-import { Languages } from "lucide-react";
-
-import { useLanguage } from "../i18n/language-provider";
+import { Languages, Check } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -112,6 +153,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 
+import { useLanguage } from "../i18n/language-provider";
+
 export function LanguageSwitcher() {
   const {
     language,
@@ -121,39 +164,44 @@ export function LanguageSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <Button
           variant="outline"
-          className="
-            h-10
-            rounded-xl
-            gap-2
-            border-border
-            bg-background
-            text-foreground
-            hover:bg-muted
-          "
+          size="icon"
+          aria-label="Change language"
         >
           <Languages className="h-4 w-4" />
-
-          {language === "en"
-            ? "English"
-            : "ગુજરાતી"}
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end">
+
         <DropdownMenuItem
           onClick={() => setLanguage("en")}
+          className="cursor-pointer"
         >
-          🇬🇧 {t.language.english}
+          <span className="mr-2">🇬🇧</span>
+
+          {t.language.english}
+
+          {language === "en" && (
+            <Check className="ml-auto h-4 w-4" />
+          )}
         </DropdownMenuItem>
 
         <DropdownMenuItem
           onClick={() => setLanguage("gu")}
+          className="cursor-pointer"
         >
-          🇮🇳 {t.language.gujarati}
+          <span className="mr-2">🇮🇳</span>
+
+          {t.language.gujarati}
+
+          {language === "gu" && (
+            <Check className="ml-auto h-4 w-4" />
+          )}
         </DropdownMenuItem>
+
       </DropdownMenuContent>
     </DropdownMenu>
   );

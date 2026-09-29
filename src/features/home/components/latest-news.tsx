@@ -112,7 +112,6 @@
 //     </section>
 //   );
 // }
-
 "use client";
 
 import Link from "next/link";
@@ -125,23 +124,23 @@ export function LatestNews() {
 
   const news = [
     {
-      category: t("news.development"),
-      title: t("news.roadProject"),
-      description: t("news.roadDescription"),
+      category: t.news.development,
+      title: t.news.roadProject,
+      description: t.news.roadDescription,
       image:
         "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80",
     },
     {
-      category: t("news.education"),
-      title: t("news.school"),
-      description: t("news.schoolDescription"),
+      category: t.news.education,
+      title: t.news.school,
+      description: t.news.schoolDescription,
       image:
         "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
     },
     {
-      category: t("news.culture"),
-      title: t("news.festival"),
-      description: t("news.festivalDescription"),
+      category: t.news.culture,
+      title: t.news.festival,
+      description: t.news.festivalDescription,
       image:
         "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=900&q=80",
     },
@@ -151,7 +150,7 @@ export function LatestNews() {
     <section>
       <SectionHeading
         icon="📰"
-        title={t("common.latestNews")}
+        title={t.common.latestNews}
         href="/news"
       />
 
@@ -160,15 +159,15 @@ export function LatestNews() {
           <article
             key={item.title}
             className="
-               group overflow-hidden
-  rounded-2xl
-  border border-border
-  bg-card
-  text-card-foreground
-  shadow-sm
-  transition-all duration-300
-  hover:-translate-y-1
-  hover:shadow-xl
+              group overflow-hidden
+              rounded-2xl
+              border border-border
+              bg-card
+              text-card-foreground
+              shadow-sm
+              transition-all duration-300
+              hover:-translate-y-1
+              hover:shadow-xl
             "
           >
             <div className="relative h-44 overflow-hidden">
@@ -201,7 +200,7 @@ export function LatestNews() {
                 {item.title}
               </h3>
 
-              <p className="mt-2 text-xs leading-5 text-[#858379] dark:text-white/45">
+              <p className="mt-2 text-xs leading-5 text-muted-foreground">
                 {item.description}
               </p>
 
@@ -211,9 +210,11 @@ export function LatestNews() {
                   mt-4 inline-flex
                   text-xs font-bold
                   text-[#4D7C5A]
+                  transition-colors
+                  hover:text-[#3F6448]
                 "
               >
-                {t("common.readMore")} →
+                {t.common.readMore} →
               </Link>
             </div>
           </article>

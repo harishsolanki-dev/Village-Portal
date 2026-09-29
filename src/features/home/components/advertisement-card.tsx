@@ -123,7 +123,7 @@ export function AdvertisementCard() {
 
         <div className="relative z-10 max-w-[220px]">
           <p className="text-xs font-bold uppercase tracking-widest text-[#8B6A32]">
-            {t("advertisement.supportLocal")}
+            {t.advertisement.supportLocal}
           </p>
 
           <h3
@@ -135,11 +135,11 @@ export function AdvertisementCard() {
               dark:text-[#F5E8CB]
             "
           >
-            {t("advertisement.title")}
+            {t.advertisement.title}
           </h3>
 
           <p className="mt-3 text-xs leading-5 text-[#816C50] dark:text-white/50">
-            {t("advertisement.description")}
+            {t.advertisement.description}
           </p>
 
           <Link
@@ -156,7 +156,7 @@ export function AdvertisementCard() {
               hover:bg-[#4D7C5A]
             "
           >
-            {t("advertisement.button")} →
+            {t.advertisement.button} →
           </Link>
         </div>
 

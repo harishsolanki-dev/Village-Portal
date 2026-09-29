@@ -176,6 +176,7 @@
 import Link from "next/link";
 
 import { LanguageSwitcher } from "../language/language-switcher";
+
 import { useLanguage } from "../i18n/language-provider";
 import { ThemeSwitcher } from "../providers/theme-provider";
 
@@ -183,8 +184,16 @@ export function SiteHeader() {
   const { t } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
+<header
+  className="
+    sticky top-0 z-50
+    border-b border-border/60
+    bg-background/75
+    backdrop-blur-2xl
+    supports-[backdrop-filter]:bg-background/60
+  "
+>
+       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
 
         {/* Logo */}
         <Link
@@ -206,8 +215,9 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Navigation */}
         <nav className="hidden items-center gap-1 lg:flex">
+
           <HeaderLink
             href="/"
             label={t.nav.home}
@@ -237,10 +247,12 @@ export function SiteHeader() {
             href="/services"
             label={t.nav.services}
           />
+
         </nav>
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+
           <LanguageSwitcher />
 
           <ThemeSwitcher />
@@ -262,8 +274,11 @@ export function SiteHeader() {
           >
             {t.nav.login}
           </Link>
+
         </div>
+
       </div>
+
     </header>
   );
 }

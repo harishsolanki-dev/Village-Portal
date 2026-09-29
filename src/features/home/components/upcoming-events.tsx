@@ -94,7 +94,6 @@
 //     </section>
 //   );
 // }
-
 "use client";
 
 import { SectionHeading } from "@/src/components/ui/section-heading";
@@ -107,23 +106,23 @@ export function UpcomingEvents() {
     {
       day: "15",
       month: "SEP",
-      title: t("events.templeFestival"),
+      title: t.events.templeFestival,
       time: "10:00 AM",
-      location: t("events.villageTemple"),
+      location: t.events.villageTemple,
     },
     {
       day: "21",
       month: "SEP",
-      title: t("events.healthCamp"),
+      title: t.events.healthCamp,
       time: "09:00 AM",
-      location: t("events.communityHall"),
+      location: t.events.communityHall,
     },
     {
       day: "02",
       month: "OCT",
-      title: t("events.cleanVillage"),
+      title: t.events.cleanVillage,
       time: "08:00 AM",
-      location: t("events.mainVillageArea"),
+      location: t.events.mainVillageArea,
     },
   ];
 
@@ -131,37 +130,36 @@ export function UpcomingEvents() {
     <section>
       <SectionHeading
         icon="📅"
-        title={t("common.upcomingEvents")}
+        title={t.common.upcomingEvents}
         href="/events"
       />
 
-      <div className="overflow-hidden rounded-2xl border border-[#E5E2D8] bg-white dark:border-white/10 dark:bg-[#1C1D17]">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card">
         {events.map((event, index) => (
           <div
-            key={event.title}
+            key={`${event.day}-${event.title}`}
             className={`
               flex gap-4 p-4
               transition-colors
-              hover:bg-[#FAFAF7]
-              dark:hover:bg-white/5
+              hover:bg-muted
               ${
                 index !== events.length - 1
-                  ? "border-b border-[#ECE9E0] dark:border-white/10"
+                  ? "border-b border-border"
                   : ""
               }
             `}
           >
+            {/* Date */}
             <div
               className="
                 flex h-14 w-14 shrink-0
-                flex-col items-center
-                justify-center
+                flex-col items-center justify-center
                 rounded-xl
                 bg-[#F5EFE1]
                 dark:bg-[#D99A2B]/10
               "
             >
-              <span className="text-lg font-black">
+              <span className="text-lg font-black text-foreground">
                 {event.day}
               </span>
 
@@ -170,16 +168,17 @@ export function UpcomingEvents() {
               </span>
             </div>
 
+            {/* Content */}
             <div className="min-w-0">
-              <h3 className="text-sm font-bold">
+              <h3 className="text-sm font-bold text-foreground">
                 {event.title}
               </h3>
 
-              <p className="mt-1 text-[11px] text-[#858379] dark:text-white/45">
+              <p className="mt-1 text-[11px] text-muted-foreground">
                 🕐 {event.time}
               </p>
 
-              <p className="mt-1 truncate text-[11px] text-[#858379] dark:text-white/45">
+              <p className="mt-1 truncate text-[11px] text-muted-foreground">
                 📍 {event.location}
               </p>
             </div>

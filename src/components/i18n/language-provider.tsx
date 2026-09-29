@@ -131,7 +131,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -167,34 +166,20 @@ export function LanguageProvider({
   children,
   defaultLanguage = "en",
 }: LanguageProviderProps) {
-  const [language, setLanguageState] =
+  const [language, setLanguage] =
     useState<Language>(defaultLanguage);
 
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem(
-      "village-portal-language"
-    ) as Language | null;
-
-    if (storedLanguage === "en" || storedLanguage === "gu") {
-      setLanguageState(storedLanguage);
-    }
-  }, []);
-
-  const setLanguage = (nextLanguage: Language) => {
-    setLanguageState(nextLanguage);
-    localStorage.setItem(
-      "village-portal-language",
-      nextLanguage
-    );
-  };
+  const t = useMemo(() => {
+    return translations[language];
+  }, [language]);
 
   const value = useMemo(
     () => ({
       language,
       setLanguage,
-      t: translations[language],
+      t,
     }),
-    [language]
+    [language, t]
   );
 
   return (

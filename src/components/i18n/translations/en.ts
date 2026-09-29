@@ -1,7 +1,8 @@
-export const en = {
+const en = {
   topbar: {
     location: "Jam Raval, Gujarat",
-    village: "Our Village",
+    community: "Village Community",
+    about: "About Us",
     contact: "Contact",
     help: "Help",
   },
@@ -9,6 +10,35 @@ export const en = {
   language: {
     english: "English",
     gujarati: "Gujarati",
+  },
+
+  events: {
+    templeFestival: "Temple Festival Opening",
+    villageTemple: "Village Temple",
+
+    healthCamp: "Community Health Camp",
+    communityHall: "Community Hall",
+
+    cleanVillage: "Clean Village Drive",
+    mainVillageArea: "Main Village Area",
+  },
+
+  common: {
+        home: "Home",
+    news: "News",
+    events: "Events",
+    gallery: "Gallery",
+    about: "About",
+    directory: "Directory",
+    governmentServices: "Government Services",
+    emergency: "Emergency",
+    localBusinesses: "Local Businesses",
+    contact: "Contact",
+    email: "Your email",
+    join: "Join",
+    latestNews: "Latest News",
+    upcomingEvents: "Upcoming Events",
+    readMore: "Read more",
   },
 
   nav: {
@@ -21,18 +51,20 @@ export const en = {
     login: "Login",
   },
 
-
   hero: {
-    badge: "JAM RAVAL VILLAGE PORTAL",
-    titleLine1: "Connecting",
-    titleLine2: "Our Village.",
+    badge: "Our Village Digital Portal",
+    title: "Our Village",
+    highlight: "Connected Together.",
     description:
-      "Your digital home for village news, events, community stories, photos and important local information.",
+      "Village news, events, community stories, photos and important local information — all in one digital home.",
     latestNews: "Latest News",
     viewEvents: "View Events",
-    freePlatform: "Free Platform",
-    villageUpdates: "Village Updates",
-    community: "Community",
+
+    stats: {
+      local: "100% Local",
+      available: "24/7 Available",
+      community: "1 Community",
+    },
   },
 
   quickLinks: {
@@ -40,30 +72,57 @@ export const en = {
       title: "News & Articles",
       text: "Latest updates",
     },
+
     events: {
       title: "Events",
       text: "Upcoming programs",
     },
+
     gallery: {
       title: "Gallery",
       text: "Photos & memories",
     },
+
     advertisements: {
       title: "Advertisements",
       text: "Support businesses",
     },
+
     directory: {
       title: "Directory",
       text: "People & services",
     },
   },
 
-  sections: {
-    latestNews: "Latest News",
-    upcomingEvents: "Upcoming Events",
-    photoGallery: "Photo Gallery",
-    viewAll: "View all",
-    readMore: "Read more",
+  news: {
+    development: "Development",
+    education: "Education",
+    culture: "Culture",
+
+    roadProject: "New Road Project to Connect Nearby Villages",
+    roadDescription:
+      "Development work and important updates from our village community.",
+
+    school: "Village School Expands Learning Opportunities",
+    schoolDescription:
+      "Discover the latest education and community development updates.",
+
+    festival: "Annual Village Festival Preparations Begin",
+    festivalDescription:
+      "Stay updated with upcoming cultural celebrations and local events.",
+  },
+
+
+  gallery: {
+    ourVillage: "Our Village",
+    festivals: "Festivals",
+    nature: "Nature",
+    community: "Community",
+
+    photos24: "24 photos",
+    photos56: "56 photos",
+    photos32: "32 photos",
+    photos48: "48 photos",
   },
 
   advertisement: {
@@ -75,13 +134,16 @@ export const en = {
   },
 
   footer: {
+    madeFor: "Made for our village community.",
+    villagePortal: "Village Portal",
+    jamRaval: "Jam Raval",
+    newsletter:
+      "Get important village updates directly.",
+    description:
+      "A free community platform for village news, events, photos, opportunities and local information.",
+
     quickLinks: "Quick Links",
     usefulResources: "Useful Resources",
-    stayConnected: "Stay Connected",
-    newsletterDescription:
-      "Get important village updates directly.",
-    emailPlaceholder: "Your email",
-    join: "Join",
 
     directory: "Directory",
     governmentServices: "Government Services",
@@ -89,8 +151,15 @@ export const en = {
     localBusinesses: "Local Businesses",
     contact: "Contact",
 
+    stayConnected: "Stay Connected",
+    newsletterDescription:
+      "Get important village updates directly.",
+
+    emailPlaceholder: "Your email",
+    join: "Join",
+
     copyright: "All rights reserved.",
-    communityMessage: "Made for our village community",
+    madeForCommunity: "Made for our village community",
   },
 };
 

@@ -89,37 +89,35 @@
 //     </section>
 //   );
 // }
-
 "use client";
 
 import Link from "next/link";
-
 import { useLanguage } from "@/src/components/i18n/language-provider";
 
 const links = [
   {
-    icon: "📰",
     key: "news",
+    icon: "📰",
     href: "/news",
   },
   {
-    icon: "📅",
     key: "events",
+    icon: "📅",
     href: "/events",
   },
   {
-    icon: "📷",
     key: "gallery",
+    icon: "📷",
     href: "/gallery",
   },
   {
-    icon: "📢",
     key: "advertisements",
+    icon: "📢",
     href: "/advertisements",
   },
   {
-    icon: "👥",
     key: "directory",
+    icon: "👥",
     href: "/directory",
   },
 ] as const;
@@ -128,7 +126,7 @@ export function QuickLinks() {
   const { t } = useLanguage();
 
   return (
-    <section className="border-b border-border bg-card">
+    <section className="border-b border-border bg-background">
       <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-5">
         {links.map((link) => {
           const item = t.quickLinks[link.key];
@@ -164,7 +162,7 @@ export function QuickLinks() {
               </div>
 
               <div>
-                <p className="text-xs font-bold text-card-foreground">
+                <p className="text-xs font-bold text-foreground">
                   {item.title}
                 </p>
 

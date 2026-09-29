@@ -188,40 +188,33 @@
 //     </div>
 //   );
 // }
-
 "use client";
 
 import Link from "next/link";
-
 import { useLanguage } from "@/src/components/i18n/language-provider";
 
 export function SiteFooter() {
   const { t } = useLanguage();
 
   const quickLinks = [
-    [t("common.home"), "/"],
-    [t("common.news"), "/news"],
-    [t("common.events"), "/events"],
-    [t("common.gallery"), "/gallery"],
-    [t("common.about"), "/about"],
+    [t.common.home, "/"],
+    [t.common.news, "/news"],
+    [t.common.events, "/events"],
+    [t.common.gallery, "/gallery"],
+    [t.common.about, "/about"],
   ];
 
   const resources = [
-    [t("common.directory"), "/directory"],
-    [
-      t("common.governmentServices"),
-      "/services",
-    ],
-    [t("common.emergency"), "/emergency"],
-    [
-      t("common.localBusinesses"),
-      "/businesses",
-    ],
-    [t("common.contact"), "/contact"],
+    [t.common.directory, "/directory"],
+    [t.common.governmentServices, "/services"],
+    [t.common.emergency, "/emergency"],
+    [t.common.localBusinesses, "/businesses"],
+    [t.common.contact, "/contact"],
   ];
 
   return (
-    <footer className="bg-[#3F3F2F] text-white">
+    <footer className="border-t border-border bg-foreground text-background">
+      {/* Main Footer */}
       <div
         className="
           mx-auto grid max-w-7xl
@@ -231,61 +224,83 @@ export function SiteFooter() {
           lg:grid-cols-4
         "
       >
+        {/* Brand */}
         <div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#D99A2B]">
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-3"
+          >
+            <div
+              className="
+                flex h-11 w-11
+                items-center justify-center
+                rounded-2xl
+                bg-primary
+                text-xl
+                transition-transform
+                duration-300
+                group-hover:-translate-y-0.5
+              "
+            >
               🏡
             </div>
 
             <div>
-              <p className="font-black">
+              <p className="font-black tracking-tight">
                 Village Portal
               </p>
 
-              <p className="text-[10px] text-white/40">
+              <p className="text-[10px] text-background/50">
                 Jam Raval
               </p>
             </div>
-          </div>
+          </Link>
 
-          <p className="mt-5 max-w-xs text-xs leading-6 text-white/45">
-            {t("footer.description")}
+          <p className="mt-5 max-w-xs text-xs leading-6 text-background/55">
+            {t.footer.description}
           </p>
         </div>
 
+        {/* Quick Links */}
         <FooterColumn
-          title={t("footer.quickLinks")}
+          title={t.footer.quickLinks}
           links={quickLinks}
         />
 
+        {/* Resources */}
         <FooterColumn
-          title={t("footer.usefulResources")}
+          title={t.footer.usefulResources}
           links={resources}
         />
 
+        {/* Newsletter */}
         <div>
           <h3 className="text-sm font-bold">
-            {t("footer.stayConnected")}
+            {t.footer.stayConnected}
           </h3>
 
-          <p className="mt-3 text-xs leading-5 text-white/45">
-            {t("footer.newsletter")}
+          <p className="mt-3 text-xs leading-5 text-background/55">
+            {t.footer.newsletter}
           </p>
 
           <div className="mt-4 flex gap-2">
             <input
               type="email"
-              placeholder={t("common.email")}
+              placeholder={t.common.email}
               className="
                 min-w-0 flex-1
                 rounded-xl
-                border border-white/10
-                bg-white/5
+                border border-background/10
+                bg-background/5
                 px-3 py-3
-                text-xs text-white
+                text-xs
+                text-background
                 outline-none
-                placeholder:text-white/30
-                focus:border-[#D99A2B]
+                transition
+                placeholder:text-background/30
+                focus:border-primary
+                focus:ring-2
+                focus:ring-primary/20
               "
             />
 
@@ -293,26 +308,33 @@ export function SiteFooter() {
               type="button"
               className="
                 rounded-xl
-                bg-[#D99A2B]
+                bg-primary
                 px-4
                 text-xs font-bold
-                text-white
-                hover:bg-[#C58A24]
+                text-primary-foreground
+                transition-all
+                hover:-translate-y-0.5
+                hover:opacity-90
+                focus:outline-none
+                focus:ring-2
+                focus:ring-primary/40
               "
             >
-              {t("common.join")}
+              {t.common.join}
             </button>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      {/* Bottom Footer */}
+      <div className="border-t border-background/10">
         <div
           className="
             mx-auto flex max-w-7xl
             flex-col gap-2
             px-5 py-5
-            text-[10px] text-white/30
+            text-[10px]
+            text-background/35
             sm:px-6
             md:flex-row
             md:items-center
@@ -321,12 +343,10 @@ export function SiteFooter() {
         >
           <p>
             © {new Date().getFullYear()} Village Portal.{" "}
-            {t("footer.copyright")}
+            {t.footer.copyright}
           </p>
 
-          <p>
-            {t("footer.madeFor")}
-          </p>
+          <p>{t.footer.madeFor}</p>
         </div>
       </div>
     </footer>
@@ -352,10 +372,11 @@ function FooterColumn({
             key={href}
             href={href}
             className="
-              block text-xs
-              text-white/45
+              block
+              text-xs
+              text-background/50
               transition-colors
-              hover:text-[#D99A2B]
+              hover:text-primary
             "
           >
             {label}
