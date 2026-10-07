@@ -94,6 +94,8 @@
 //     </section>
 //   );
 // }
+
+
 "use client";
 
 import { SectionHeading } from "@/src/components/ui/section-heading";
@@ -142,31 +144,29 @@ export function UpcomingEvents() {
               flex gap-4 p-4
               transition-colors
               hover:bg-muted
-              ${
-                index !== events.length - 1
-                  ? "border-b border-border"
-                  : ""
+              ${index !== events.length - 1
+                ? "border-b border-border"
+                : ""
               }
             `}
           >
             {/* Date */}
-            <div
-              className="
-                flex h-14 w-14 shrink-0
-                flex-col items-center justify-center
-                rounded-xl
-                bg-[#F5EFE1]
-                dark:bg-[#D99A2B]/10
-              "
-            >
-              <span className="text-lg font-black text-foreground">
-                {event.day}
-              </span>
+          <div
+  className="
+    flex h-14 w-14 shrink-0
+    flex-col items-center justify-center
+    rounded-xl
+    bg-muted
+  "
+>
+  <span className="text-lg font-black text-foreground">
+    {event.day}
+  </span>
 
-              <span className="text-[9px] font-bold text-[#D99A2B]">
-                {event.month}
-              </span>
-            </div>
+  <span className="text-[9px] font-bold text-accent">
+    {event.month}
+  </span>
+</div>
 
             {/* Content */}
             <div className="min-w-0">

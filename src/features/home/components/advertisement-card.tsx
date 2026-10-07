@@ -85,11 +85,9 @@
 //     </section>
 //   );
 // }
-
 "use client";
 
 import Link from "next/link";
-
 import { useLanguage } from "@/src/components/i18n/language-provider";
 
 export function AdvertisementCard() {
@@ -103,42 +101,34 @@ export function AdvertisementCard() {
           min-h-[270px]
           overflow-hidden
           rounded-3xl
-          bg-[#F5E8CB]
+          border border-border
+          bg-muted
           p-7
-          dark:bg-[#332C1D]
         "
       >
         <span
           className="
             absolute right-5 top-5
             rounded-md
-            bg-[#D99A2B]
+            bg-accent
             px-2 py-1
             text-[9px] font-black
-            text-white
+            text-accent-foreground
           "
         >
           AD
         </span>
 
         <div className="relative z-10 max-w-[220px]">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#8B6A32]">
+          <p className="text-xs font-bold uppercase tracking-widest text-secondary">
             {t.advertisement.supportLocal}
           </p>
 
-          <h3
-            className="
-              mt-3
-              text-2xl font-black
-              leading-tight
-              text-[#5B4429]
-              dark:text-[#F5E8CB]
-            "
-          >
+          <h3 className="mt-3 text-2xl font-black leading-tight text-foreground">
             {t.advertisement.title}
           </h3>
 
-          <p className="mt-3 text-xs leading-5 text-[#816C50] dark:text-white/50">
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">
             {t.advertisement.description}
           </p>
 
@@ -147,13 +137,13 @@ export function AdvertisementCard() {
             className="
               mt-5 inline-flex
               rounded-xl
-              bg-[#3F3F2F]
+              bg-primary
               px-4 py-2.5
               text-xs font-bold
-              text-white
+              text-primary-foreground
               transition-all
               hover:-translate-y-0.5
-              hover:bg-[#4D7C5A]
+              hover:bg-secondary
             "
           >
             {t.advertisement.button} →

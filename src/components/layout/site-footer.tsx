@@ -191,52 +191,108 @@
 "use client";
 
 import Link from "next/link";
+
 import { useLanguage } from "@/src/components/i18n/language-provider";
+
+type FooterLink = {
+  label: string;
+  href: string;
+};
 
 export function SiteFooter() {
   const { t } = useLanguage();
 
-  const quickLinks = [
-    [t.common.home, "/"],
-    [t.common.news, "/news"],
-    [t.common.events, "/events"],
-    [t.common.gallery, "/gallery"],
-    [t.common.about, "/about"],
+  const quickLinks: FooterLink[] = [
+    {
+      label: t.common.home,
+      href: "/",
+    },
+    {
+      label: t.common.news,
+      href: "/news",
+    },
+    {
+      label: t.common.events,
+      href: "/events",
+    },
+    {
+      label: t.common.gallery,
+      href: "/gallery",
+    },
+    {
+      label: t.common.about,
+      href: "/about",
+    },
   ];
 
-  const resources = [
-    [t.common.directory, "/directory"],
-    [t.common.governmentServices, "/services"],
-    [t.common.emergency, "/emergency"],
-    [t.common.localBusinesses, "/businesses"],
-    [t.common.contact, "/contact"],
+  const resources: FooterLink[] = [
+    {
+      label: t.common.directory,
+      href: "/directory",
+    },
+    {
+      label: t.common.governmentServices,
+      href: "/services",
+    },
+    {
+      label: t.common.emergency,
+      href: "/emergency",
+    },
+    {
+      label: t.common.localBusinesses,
+      href: "/businesses",
+    },
+    {
+      label: t.common.contact,
+      href: "/contact",
+    },
   ];
 
   return (
-    <footer className="border-t border-border bg-foreground text-background">
-      {/* Main Footer */}
+    <footer
+      className="
+        border-t border-border
+        bg-footer-background
+        text-footer-foreground
+      "
+    >
+      {/* =========================
+          Main Footer
+      ========================== */}
       <div
         className="
-          mx-auto grid max-w-7xl
-          gap-10 px-5 py-14
+          mx-auto
+          grid max-w-7xl
+          gap-10
+          px-5 py-14
           sm:px-6
           md:grid-cols-2
           lg:grid-cols-4
         "
       >
-        {/* Brand */}
+        {/* =========================
+            Brand
+        ========================== */}
         <div>
           <Link
             href="/"
-            className="group inline-flex items-center gap-3"
+            className="
+              group
+              inline-flex
+              items-center
+              gap-3
+            "
           >
+            {/* Logo */}
             <div
               className="
                 flex h-11 w-11
+                shrink-0
                 items-center justify-center
                 rounded-2xl
-                bg-primary
+                bg-accent
                 text-xl
+                shadow-sm
                 transition-transform
                 duration-300
                 group-hover:-translate-y-0.5
@@ -245,144 +301,228 @@ export function SiteFooter() {
               🏡
             </div>
 
+            {/* Brand Name */}
             <div>
-              <p className="font-black tracking-tight">
+              <p
+                className="
+                  font-black
+                  tracking-tight
+                  text-footer-foreground
+                "
+              >
                 Village Portal
               </p>
 
-              <p className="text-[10px] text-background/50">
+              <p
+                className="
+                  text-[10px]
+                  text-footer-foreground/50
+                "
+              >
                 Jam Raval
               </p>
             </div>
           </Link>
 
-          <p className="mt-5 max-w-xs text-xs leading-6 text-background/55">
+          <p
+            className="
+              mt-5
+              max-w-xs
+              text-xs
+              leading-6
+              text-footer-foreground/55
+            "
+          >
             {t.footer.description}
           </p>
         </div>
 
-        {/* Quick Links */}
+        {/* =========================
+            Quick Links
+        ========================== */}
         <FooterColumn
           title={t.footer.quickLinks}
           links={quickLinks}
         />
 
-        {/* Resources */}
+        {/* =========================
+            Resources
+        ========================== */}
         <FooterColumn
           title={t.footer.usefulResources}
           links={resources}
         />
 
-        {/* Newsletter */}
+        {/* =========================
+            Stay Connected
+        ========================== */}
         <div>
-          <h3 className="text-sm font-bold">
+          <h3
+            className="
+              text-sm
+              font-bold
+              text-footer-foreground
+            "
+          >
             {t.footer.stayConnected}
           </h3>
 
-          <p className="mt-3 text-xs leading-5 text-background/55">
+          <p
+            className="
+              mt-3
+              text-xs
+              leading-5
+              text-footer-foreground/55
+            "
+          >
             {t.footer.newsletter}
           </p>
 
-          <div className="mt-4 flex gap-2">
+          {/* Newsletter */}
+          <form
+            className="
+              mt-4
+              flex
+              gap-2
+            "
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <label
+              htmlFor="footer-email"
+              className="sr-only"
+            >
+              {t.common.email}
+            </label>
+
             <input
+              id="footer-email"
               type="email"
               placeholder={t.common.email}
+              autoComplete="email"
               className="
-                min-w-0 flex-1
+                min-w-0
+                flex-1
                 rounded-xl
-                border border-background/10
-                bg-background/5
+                border border-footer-foreground/10
+                bg-footer-foreground/5
                 px-3 py-3
                 text-xs
-                text-background
+                text-footer-foreground
                 outline-none
                 transition
-                placeholder:text-background/30
-                focus:border-primary
+                placeholder:text-footer-foreground/30
+                focus:border-accent
                 focus:ring-2
-                focus:ring-primary/20
+                focus:ring-accent/20
               "
             />
 
             <button
-              type="button"
+              type="submit"
               className="
+                shrink-0
                 rounded-xl
-                bg-primary
+                bg-accent
                 px-4
-                text-xs font-bold
-                text-primary-foreground
+                text-xs
+                font-bold
+                text-accent-foreground
                 transition-all
                 hover:-translate-y-0.5
-                hover:opacity-90
+                hover:brightness-95
                 focus:outline-none
                 focus:ring-2
-                focus:ring-primary/40
+                focus:ring-accent/40
               "
             >
               {t.common.join}
             </button>
-          </div>
+          </form>
         </div>
       </div>
 
-      {/* Bottom Footer */}
-      <div className="border-t border-background/10">
+      {/* =========================
+          Bottom Footer
+      ========================== */}
+      <div
+        className="
+          border-t
+          border-footer-foreground/10
+        "
+      >
         <div
           className="
-            mx-auto flex max-w-7xl
-            flex-col gap-2
+            mx-auto
+            flex max-w-7xl
+            flex-col
+            gap-2
             px-5 py-5
             text-[10px]
-            text-background/35
             sm:px-6
             md:flex-row
             md:items-center
             md:justify-between
           "
         >
-          <p>
+          <p className="text-footer-foreground/35">
             © {new Date().getFullYear()} Village Portal.{" "}
             {t.footer.copyright}
           </p>
 
-          <p>{t.footer.madeFor}</p>
+          <p className="text-footer-foreground/35">
+            {t.footer.madeFor}
+          </p>
         </div>
       </div>
     </footer>
   );
 }
 
+/* =========================================================
+   Footer Column
+========================================================= */
+
 function FooterColumn({
   title,
   links,
 }: {
   title: string;
-  links: string[][];
+  links: FooterLink[];
 }) {
   return (
     <div>
-      <h3 className="text-sm font-bold">
+      <h3
+        className="
+          text-sm
+          font-bold
+          text-footer-foreground
+        "
+      >
         {title}
       </h3>
 
-      <div className="mt-4 space-y-2.5">
-        {links.map(([label, href]) => (
+      <nav
+        aria-label={title}
+        className="mt-4 space-y-2.5"
+      >
+        {links.map((link) => (
           <Link
-            key={href}
-            href={href}
+            key={link.href}
+            href={link.href}
             className="
               block
               text-xs
-              text-background/50
+              text-footer-foreground/50
               transition-colors
-              hover:text-primary
+              hover:text-accent
             "
           >
-            {label}
+            {link.label}
           </Link>
         ))}
-      </div>
+      </nav>
     </div>
   );
 }
